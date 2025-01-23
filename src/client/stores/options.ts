@@ -20,6 +20,7 @@ export interface SearchState {
   includeVirtual: boolean
   includeUnreached: boolean
   exactSearch: boolean
+  regex: boolean
 }
 
 export const useOptionsStore = defineStore('options', () => {
@@ -49,6 +50,7 @@ export const useOptionsStore = defineStore('options', () => {
       includeVirtual: false,
       includeUnreached: false,
       exactSearch: false,
+      regex: false,
     },
     { mergeDefaults: true },
   )
