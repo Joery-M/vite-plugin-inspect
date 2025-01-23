@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Badge: typeof import('./components/Badge.vue')['default']
     ByteSizeDisplay: typeof import('./components/ByteSizeDisplay.vue')['default']
+    Checkbox: typeof import('./components/Checkbox.vue')['default']
     Container: typeof import('./components/Container.vue')['default']
     DiffEditor: typeof import('./components/DiffEditor.vue')['default']
     DurationDisplay: typeof import('./components/DurationDisplay.vue')['default']
