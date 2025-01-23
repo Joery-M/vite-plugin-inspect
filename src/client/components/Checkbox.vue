@@ -11,7 +11,7 @@ const props = withDefaults(
     disabled: false,
   },
 )
-const emit = defineEmits<{ (...args: any): void }>()
+const emit = defineEmits(['update:modelValue'])
 const checked = useVModel(props, 'modelValue', emit, { passive: true })
 </script>
 
@@ -24,9 +24,9 @@ const checked = useVModel(props, 'modelValue', emit, { passive: true })
       :disabled
       @keypress.enter="checked = !checked"
     >
-    <span border="~ main" class="size-4.5 rounded peer-focus-visible:outline-auto">
+    <span border="~ main" class="size-4.5 rounded peer-disabled:op-50 peer-focus-visible:outline-auto">
       <span i-carbon-checkmark :op="checked ? 100 : 0" size-full />
     </span>
-    <span class="ml-1.5 lh-normal"><slot /></span>
+    <span class="ml-1.5 lh-normal peer-disabled:op-50"><slot /></span>
   </label>
 </template>

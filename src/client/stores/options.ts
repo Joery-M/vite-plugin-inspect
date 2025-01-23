@@ -21,6 +21,7 @@ export interface SearchState {
   includeUnreached: boolean
   exactSearch: boolean
   regex: boolean
+  glob: boolean
 }
 
 export const useOptionsStore = defineStore('options', () => {
@@ -51,6 +52,7 @@ export const useOptionsStore = defineStore('options', () => {
       includeUnreached: false,
       exactSearch: false,
       regex: false,
+      glob: false,
     },
     { mergeDefaults: true },
   )

@@ -11,7 +11,7 @@ const options = useOptionsStore()
       v-model="options.search.text"
       type="text"
       class="w-full border border-main rounded bg-transparent px-3 py-1 pr-8 !outline-none"
-      :font="options.search.regex ? 'mono' : null"
+      :font="(options.search.regex || options.search.glob) ? 'mono' : null"
       placeholder="Search..."
     >
     <Dropdown class="pos-absolute right-0 top-50% transform-translate-y--50%">
@@ -20,11 +20,14 @@ const options = useOptionsStore()
       </button>
       <template #popper>
         <div flex="~ col gap-1" px-3 py-2>
-          <Checkbox v-model="options.search.exactSearch">
+          <Checkbox v-model="options.search.exactSearch" :disabled="options.search.glob">
             exact {{ options.search.regex ? 'case' : 'search' }}
           </Checkbox>
-          <Checkbox v-model="options.search.regex">
+          <Checkbox v-model="options.search.regex" @update:model-value="(ev) => ev && (options.search.glob = false)">
             regex
+          </Checkbox>
+          <Checkbox v-model="options.search.glob" @update:model-value="(ev) => ev && (options.search.regex = false)">
+            glob
           </Checkbox>
           <Checkbox v-model="options.search.includeNodeModules">
             node_modules

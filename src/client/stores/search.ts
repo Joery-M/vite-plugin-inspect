@@ -1,6 +1,7 @@
 import type { ModuleInfo } from '../../types'
 import Fuse from 'fuse.js'
 import { isAbsolute, relative } from 'pathe'
+import pm from 'picomatch'
 import { defineStore } from 'pinia'
 import { useOptionsStore } from './options'
 import { usePayloadStore } from './payload'
@@ -49,6 +50,10 @@ export const useSearchResults = defineStore('search', () => {
         // Catch invalid regex errors, then return old value
         return oldResults || modules
       }
+    }
+    else if (state.search.glob) {
+      const currentGlob = pm(state.search.text, { contains: true })
+      return modules.filter(item => currentGlob(item.id))
     }
     else if (state.search.exactSearch) {
       return modules.filter(item =>
